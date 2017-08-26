@@ -1,7 +1,7 @@
 \c news
 
 
-CREATE VIEW topNews AS
+CREATE VIEW topArticles AS
 	SELECT a.title as title, count(l.id) as views
 	FROM articles as a LEFT JOIN log as l
 	ON a.slug = split_part(l.path, '/', 3)
