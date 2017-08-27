@@ -13,31 +13,31 @@ def mainMenu():
     Allows to request analysis
     """
     print "\n"
-    print "To get the list of top authors, enter 'AUTHORS'"
-    print "To get the list of top articles, enter 'ARTICLES'"
-    print "To get the list of days with more than 1% errors, enter 'LOGS'"
-    print "To exit the program, enter 'EXIT'\n"
-    menu_choices = ['authors', 'articles', 'logs', 'exit']
+    print "To get the list of top authors, enter '1'"
+    print "To get the list of top articles, enter '2'"
+    print "To get the list of days with more than 1% of errors, enter '3'"
+    print "To quit the program, enter 'q'\n"
+    menu_choices = ['1', '2', '3', 'q']
     choice = getInput(menu_choices)
-    if choice == 'exit':
+    if choice == 'q':
         return
-    if choice == 'authors':
+    if choice == '1':
         topAuthors = getTopAuthors()
         print '\nTOP AUTHORS ARE:'
-        for author in topAuthors:
-            print '·%s – %s views' % (author[0], author[1])
+        for author, views in topAuthors:
+            print('·{} – {} views'.format(author, views))
         mainMenu()
-    if choice == 'articles':
+    if choice == '2':
         topArticles = getTopArticles()
         print '\nTOP ARTICLES ARE:'
-        for article in topArticles:
-            print '·%s – %s views' % (article[0], article[1])
+        for article, views in topArticles:
+            print('·{} – {} views'.format(article, views))
         mainMenu()
-    if choice == 'logs':
+    if choice == '3':
         badDays = getBadDays()
         print '\nDAYS WITH MORE THAN 1% BAD REQUESTS:'
-        for day in badDays:
-            print '·%s – %s%% errors' % (day[0], day[1])
+        for date, errors in badDays:
+            print('·{:%B %d, %Y} – {}% of bad requests'.format(date, errors))
         mainMenu()
 
 
@@ -54,4 +54,5 @@ def getInput(menu_choices):
     return choice
 
 
-mainMenu()
+if __name__ == '__main__':
+    mainMenu()
